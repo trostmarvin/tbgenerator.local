@@ -1,3 +1,11 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+generator_form:
+    path: /generator
+    controller: App\Controller\AppController::generator_form
+    methods: GET
+generator:
+    path: /generator
+    controller: App\Controller\AppController::generator
+    methods: POST
