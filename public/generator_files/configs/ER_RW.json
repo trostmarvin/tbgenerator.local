@@ -1,0 +1,54 @@
+{
+    "template_file_name": "default_template.png",
+
+    "objects": {
+        "light_red": {
+            "object_file_name": "light_red.png",
+            "possible_coordinates": [
+                [368, 150],
+                [651, 184],
+                [898, 135],
+                [1053, 184],
+                [444, 535],
+                [843, 472]
+            ]
+        },
+        "light_yellow": {
+            "object_file_name": "light_yellow.png",
+            "possible_coordinates": [
+                [368, 150],
+                [651, 184],
+                [898, 135],
+                [1053, 184],
+                [444, 535],
+                [843, 472]
+            ]
+        },
+        "barriers": {
+            "object_file_name": "barriers.png",
+            "possible_coordinates": [
+                [756, 77],
+                [756, 413]
+            ]
+        }
+    },
+
+    "phase_1": {
+        "objects_to_place": [
+            ["light_red", {
+                "amount": 3
+            }],
+            ["light_yellow", {
+                "amount": 3
+            }]
+        ]
+    },
+
+    "phase_2": {
+        "objects_to_place": [
+            ["barriers", {
+                "amount": 1
+            }]
+        ]
+    }
+}
