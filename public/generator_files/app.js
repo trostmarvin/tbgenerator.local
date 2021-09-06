@@ -103,6 +103,11 @@ class App extends React.Component {
         })
         .then(function (response) {
             console.log(response);
+
+            if(response.data.success) {
+                let resultPreviewElement = document.getElementById('result-preview');
+                resultPreviewElement.setAttribute('src', response.data.image_file);
+            }
         })
         .catch(function (error) {
             console.log(error);
@@ -146,7 +151,7 @@ class App extends React.Component {
                             checked={this.state.uploadVisible}
                             onChange={this.handleUploadCheckboxChange} />
                         <label className='form-check-label' htmlFor='uploadCheckbox'>
-                            [Nicht implementiert] Auf vorhandener Karte neue Runde auswürfeln?
+                            Auf vorhandener Karte neue Runde auswürfeln?
                         </label>
                     </div>
 
@@ -160,7 +165,7 @@ class App extends React.Component {
 
                 <div>
                     <p>Result:</p>
-                    <img />
+                    <img id="result-preview" className="image-preview rounded mx-auto d-block img-fluid w-50" />
                 </div>
 
             </div>

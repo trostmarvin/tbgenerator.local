@@ -23,6 +23,7 @@ class AppController extends AbstractController
         $category = $request->get('category');
         $contest = $request->get('contest');
         $image = $request->files->get('image');
+        $baseurl = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBasePath() . '/';
 
         if($image) {
             // let vich uploader handle the file
@@ -38,18 +39,20 @@ class AppController extends AbstractController
             return $this->generate(
                 $category,
                 $contest,
-                $uploaded_image->getImageName()
+                $uploaded_image->getImageName(),
+                $baseurl
             );
         }
 
         return $this->generate(
             $category,
             $contest,
-            false
+            false,
+            $baseurl
         );
     }
 
-    private function generate($category, $contest, $image_file_name) {
+    private function generate($category, $contest, $image_file_name, $baseurl = '') {
 
         /* Generator Variables */
 
@@ -145,16 +148,17 @@ class AppController extends AbstractController
             } 
         }
 
-        /* Save image temporarily */
-        imagepng($img, $rendered_images_path . 'rendered_image.png');
+        /* Save image */
+        $generated_image_name = 'rendered_image_'. bin2hex(random_bytes(16)) .'.png';
+        imagepng($img, $rendered_images_path . $generated_image_name);
 
-        // Free up memory
+        /* Free up memory */
         imagedestroy($img);
 
         /* JSON Response */
         return($this->json([
             "success" => true,
-            "image_file" => $image_path . $image_file_name,
+            "image_file" => $baseurl . $rendered_images_path . $generated_image_name,
             "config_used" => $generator_settings
         ]));
     }
